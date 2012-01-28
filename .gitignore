@@ -1,0 +1,10 @@
+bin
+obj
+*.suo
+*.user
+*.pdb
+packages
+_Resharper*
+
+SPMapper.Debug
+SPMapper-Debug.sln
