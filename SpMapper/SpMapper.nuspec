@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SpMapper-Model-2010</id>
+    <version>0.1</version>
+    <title>SpMapper 2010</title>
+    <authors>Kappy</authors>
+    <owners>Kappy</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>https://github.com/kappy/SpMapper</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple object mapper to sharepoint lists</description>
+    <releaseNotes>Initial Alpha version. Only simple types are suported. Not yet signed</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>sharepoint object model</tags>
+  </metadata>
+</package>
