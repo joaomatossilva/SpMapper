@@ -43,8 +43,6 @@ This is what I imagine for Version 1.0:
 - Insert an item / items on a list
 - Delete item / items on a list probably based on a query or item id?
 - Update item based on item id?
-- Suport for also Sahrepoint client object model
-- Support for Sharepoint 2007
 
 4. Version History
 -------------------------
