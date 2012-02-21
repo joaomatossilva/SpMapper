@@ -6,5 +6,7 @@ obj
 packages
 _Resharper*
 
+*.nupkg
+
 SPMapper.Debug
 SPMapper-Debug.sln
