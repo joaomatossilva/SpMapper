@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>SpMapper-Client-2010</id>
+    <id>SpMapper-Model-2007</id>
     <version>0.2</version>
-    <title>SpMapper 2010 (Client Object Model)</title>
+    <title>SpMapper 2007 (Object Model)</title>
     <authors>Kappy</authors>
     <owners>Kappy</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
     <projectUrl>https://github.com/kappy/SpMapper</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A simple object mapper to sharepoint lists, to use with Sharepoint 2010 Client Object Model</description>
+    <description>A simple object mapper to sharepoint lists, to use with Sharepoint 2007 Object Model</description>
     <releaseNotes>Initial Alpha version. Only simple types are suported. Not yet signed</releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>sharepoint object model</tags>
