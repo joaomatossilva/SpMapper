@@ -49,6 +49,11 @@ This is what I imagine for Version 1.0:
 4. Version History
 -------------------------
 
+v0.2
+2012-02-21
+- Added support for Sharepoint 2010 Client object model and Sharepoint 2007
+- Removed the type inspection code on each item. The map is now build only once
+
 v0.1
 2012-02-08
 First public apha version.
