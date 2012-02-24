@@ -8,5 +8,5 @@ _Resharper*
 
 *.nupkg
 
-SPMapper.Debug
+SPMapper.Debug*
 SPMapper-Debug.sln
