@@ -25,27 +25,55 @@ But if you want a simple access to data on a list, try it out. It's simple and (
 2. Quick Usage
 -------------------------
 
+	/************ Object Model **********/
 	using(var site = new SPSite("http://localhost:8090"))
 	using (var web = site.OpenWeb()) {
 		var list = web.Lists["Mapper"];
+		
+		// Query Items
 		var spQuery = new SPQuery();
 		var items = list.Query<TestClass>(spQuery).ToList();
 
-		/* use your items */
+		//Insert Item(s)
+		var newItem = new TestClass { Title="Hello world", testebool = false, testeInt = 1, testeString = "insert" };
+		list.Insert(newItem);
 	}
+
+	/************ Client Object Model **********/
+	var clientContext = new ClientContext("http://localhost:8090");
+	var list = clientContext.Web.Lists.GetByTitle("Mapper");
+
+	// Query Items
+	var camlQuery = new CamlQuery { ViewXml =  "<View />"};
+	var items = list.Query<TestClass>(camlQuery, clientContext).ToList();
+
+	//Insert Item(s)
+	var newItem = new TestClass { Title="Hello Client", testebool = false, testeInt = 1, testeString = "insert" };
+	list.Insert(newItem, clientContext);
+
+Note about Client object model:
+- since the client api uses a "disconnected" model, multiple ClientContext.ExecuteQuery
+may be required. Example:
+	- Query: only 1 roundtrip is needed;
+	- Insert: requires 2 roundtrips. 1st to build a properties map and a second to push the inserted items.
 
 	
 3. RoadMap
 -------------------------
 
 This is what I imagine for Version 1.0:
-- Query over a list
-- Insert an item / items on a list
+- Query over a list (done)
+- Insert an item / items on a list (done)
 - Delete item / items on a list probably based on a query or item id?
 - Update item based on item id?
 
 4. Version History
 -------------------------
+
+v0.3
+2012-02-xx
+- Added insert functionality
+- fixed Client Model Query (includes breaking changes!)
 
 v0.2
 2012-02-21
