@@ -60,6 +60,34 @@ namespace SpMapper {
 			}
 			context.ExecuteQuery();
 		}
+
+		public static void Update<T>(this List list, T itemToUpdate, ClientContext context) where T : ISpEntity {
+			Update(list, (IEnumerable<T>)new[] { itemToUpdate }, context);
+		}
+
+		public static void Update<T>(this List list, IEnumerable<T> itemsToUpdate, ClientContext context) where T : ISpEntity {
+			context.Load(list.Fields);
+			context.ExecuteQuery();
+			var map = BuildMap(typeof(T), list.Fields.ToList().Select(field => field.InternalName));
+			foreach (var itemToUpdate in itemsToUpdate) {
+				var item = list.GetItemById(itemToUpdate.Id);
+				SetItemValues(map, itemToUpdate, (fieldName, value) => { item[fieldName] = value; });
+				item.Update();
+			}
+			context.ExecuteQuery();
+		}
+
+		public static void Delete<T>(this List list, T itemToDelete, ClientContext context) where T : ISpEntity {
+			Delete(list, (IEnumerable<T>)new[] { itemToDelete }, context);
+		}
+
+		public static void Delete<T>(this List list, IEnumerable<T> itemsToDelete, ClientContext context) where T : ISpEntity {
+			foreach (var itemToDelete in itemsToDelete) {
+				var item = list.GetItemById(itemToDelete.Id);
+				item.DeleteObject();
+			}
+			context.ExecuteQuery();
+		}
 #else
 		public static IEnumerable<T> Query<T>(this SPList list, string camlQuery) where T : new() {
 			var query = new SPQuery { Query = camlQuery };
