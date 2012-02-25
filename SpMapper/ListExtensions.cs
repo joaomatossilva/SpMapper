@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,7 +15,6 @@ namespace SpMapper {
 
 	public interface ISpEntity {
 		int Id { get; }
-		string Title { get; }
 	}
 
 	public static class ListExtensions {
@@ -75,15 +75,44 @@ namespace SpMapper {
 		}
 
 		public static void Insert<T>(this SPList list, T itemToInsert) where T : ISpEntity {
-			Insert(list, (IEnumerable <T>)new [] { itemToInsert });
+			Insert(list, (IEnumerable<T>)new[] { itemToInsert });
 		}
 
 		public static void Insert<T>(this SPList list, IEnumerable<T> itemsToInsert) where T : ISpEntity {
 			var map = BuildMap(typeof(T), GetFieldNames(list));
 			foreach (var itemToInsert in itemsToInsert) {
+#if SP2007
+				SPItem item = list.Items.Add();
+#else
 				SPItem item = list.AddItem();
+#endif
 				SetItemValues(map, itemToInsert, (fieldName, value) => { item[fieldName] = value; });
 				item.Update();				
+			}
+		}
+
+		public static void Update<T>(this SPList list, T itemToUpdate) where T : ISpEntity {
+			Update(list, (IEnumerable<T>)new[] { itemToUpdate });
+		}
+
+		public static void Update<T>(this SPList list, IEnumerable<T> itemsToUpdate) where T : ISpEntity {
+			var map = BuildMap(typeof(T), GetFieldNames(list));
+			foreach (var itemToUpdate in itemsToUpdate) {
+				SPItem item = list.GetItemById(itemToUpdate.Id);
+				SetItemValues(map, itemToUpdate, (fieldName, value) => { item[fieldName] = value; });
+				item.Update();
+			}
+		}
+
+		public static void Delete<T>(this SPList list, T itemToDelete) where T : ISpEntity {
+			Delete(list, (IEnumerable<T>)new[] { itemToDelete });
+		}
+
+		public static void Delete<T>(this SPList list, IEnumerable<T> itemsToDelete ) where T : ISpEntity {
+			foreach (var itemToDelete in itemsToDelete) {
+				SPItem item = list.GetItemById(itemToDelete.Id);
+				item.Delete();
+				item.Update();
 			}
 		}
 
