@@ -61,18 +61,18 @@ may be required. Example:
 3. RoadMap
 -------------------------
 
-This is what I imagine for Version 1.0:
-- Query over a list (done)
-- Insert an item / items on a list (done)
-- Delete item / items on a list probably based on a query or item id?
-- Update item based on item id?
+Base features are now implemented.
+Better testing still needed.
+
 
 4. Version History
 -------------------------
 
 v0.3
-2012-02-xx
-- Added insert functionality
+2012-03-03
+- Added Insert feature
+- Added Update feature
+- Added Delete feature
 - fixed Client Model Query (includes breaking changes!)
 
 v0.2
