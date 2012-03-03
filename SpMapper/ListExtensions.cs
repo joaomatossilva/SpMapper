@@ -140,7 +140,6 @@ namespace SpMapper {
 			foreach (var itemToDelete in itemsToDelete) {
 				SPItem item = list.GetItemById(itemToDelete.Id);
 				item.Delete();
-				item.Update();
 			}
 		}
 
