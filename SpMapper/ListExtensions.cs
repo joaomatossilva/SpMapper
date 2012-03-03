@@ -179,8 +179,13 @@ namespace SpMapper {
 		private static T BuildObject<T>(IEnumerable<PropertyMap> typeMap, Func<string, object> getValue) where T : new() {
 			var obj = new T();
 			foreach (var propertyMap in typeMap) {
-				object settablePropertyValue = Convert.ChangeType(getValue(propertyMap.MapToFieldName), propertyMap.PropertyType);
-				propertyMap.Property.SetValue(obj, settablePropertyValue, null);
+				object propertyValue = getValue(propertyMap.MapToFieldName);
+				if(propertyMap.IsNullableType && propertyValue == null) {
+					propertyMap.Property.SetValue(obj, null, null);
+				}else {
+					object settablePropertyValue = Convert.ChangeType(propertyValue, propertyMap.PropertyType);
+					propertyMap.Property.SetValue(obj, settablePropertyValue, null);
+				}
 			}
 			return obj;
 		}
